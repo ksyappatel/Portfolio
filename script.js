@@ -55,11 +55,6 @@ if (cursorGlow) {
         }
         el.style.transition = 'transform 0.1s ease-out, box-shadow 0.2s ease-out';
         el.style.zIndex = '100';
-        
-        // Merge cursor color seamlessly into solid buttons
-        if (el.classList.contains('btn-primary') || el.classList.contains('social-icon')) {
-            cursorGlow.style.background = 'rgba(255, 255, 255, 0.15)';
-        }
     };
 
     const resetMagnetic = (el) => {
@@ -70,7 +65,6 @@ if (cursorGlow) {
         cursorGlow.style.width = '';
         cursorGlow.style.height = '';
         cursorGlow.style.borderRadius = '';
-        cursorGlow.style.background = '';
         
         el.style.transform = '';
         el.style.boxShadow = '';
@@ -603,9 +597,57 @@ projectCards.forEach(card => {
             progressBar.style.transition = 'none';
             progressBar.style.width = '0%';
         }
+
+
         clearTimeout(hoverTimer);
     });
 });
 
 
 // ==== Contact form JS removed ====
+
+// ==== Global Contact Interaction Utilities ====
+function copyToClipboard(text, element) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Create tooltip
+        const tooltip = document.createElement('div');
+        tooltip.textContent = 'Copied!';
+        tooltip.style.position = 'absolute';
+        tooltip.style.background = 'var(--accent)';
+        tooltip.style.color = '#fff';
+        tooltip.style.padding = '4px 8px';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.fontSize = '12px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.style.opacity = '0';
+        tooltip.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        tooltip.style.transform = 'translateY(10px)';
+        tooltip.style.zIndex = '1000';
+        
+        // Position relative to the clicked element
+        const rect = element.getBoundingClientRect();
+        tooltip.style.top = `${rect.top + window.scrollY - 30}px`;
+        tooltip.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
+        tooltip.style.transform = `translateX(-50%) translateY(0)`;
+        
+        document.body.appendChild(tooltip);
+        
+        // Animate in
+        requestAnimationFrame(() => {
+            tooltip.style.opacity = '1';
+        });
+        
+        // Remove after 2 seconds
+        setTimeout(() => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = `translateX(-50%) translateY(-10px)`;
+            setTimeout(() => tooltip.remove(), 200);
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy contact info: ', err);
+    });
+}
+
+function openAhmedabadMap() {
+    window.open('https://www.google.com/maps/place/Ahmedabad,+Gujarat,+India', '_blank');
+}

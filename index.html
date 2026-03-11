@@ -51,8 +51,8 @@
                 <h2 class="title" style="font-size: clamp(20px, 3.5vw, 45px);">Digital Transformation Engineer (AI & Automation)</h2>
                 <p class="hero-bio">I specialize in identifying operational bottlenecks, conducting deep research into emerging AI tools, and continuously learning to orchestrate elegant, automated solutions.</p>
                 <div class="contact-info">
-                    <span><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat, India</span>
-                    <span><i class="fas fa-phone"></i> +91 94081 71261</span>
+                    <span style="cursor:pointer;" title="Click icon to open Map"><i class="fas fa-map-marker-alt" onclick="openAhmedabadMap()"></i> <span onclick="openAhmedabadMap()">Ahmedabad, Gujarat, India</span></span>
+                    <span ondblclick="copyToClipboard('+91 94081 71261', this)" title="Double click to copy phone" style="cursor:pointer;"><i class="fas fa-phone" onclick="copyToClipboard('+91 94081 71261', this.parentElement)" title="Click icon to copy"></i> +91 94081 71261</span>
                 </div>
                 <div class="social-links">
                     <a href="mailto:ksyappatel@gmail.com" target="_blank" aria-label="Email" class="btn btn-primary" title="Send an email to Kashyap">
@@ -405,24 +405,24 @@
                 
                 <div class="contact-details mt-5" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px;"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="copyToClipboard('ksyappatel@gmail.com', this)" title="Click to copy Email"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
-                            <a href="mailto:ksyappatel@gmail.com">ksyappatel@gmail.com</a>
+                            <a href="mailto:ksyappatel@gmail.com" ondblclick="event.preventDefault(); copyToClipboard('ksyappatel@gmail.com', this)" title="Double click to copy">ksyappatel@gmail.com</a>
                         </div>
                     </div>
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px;"><i class="fas fa-phone"></i></div>
+                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="copyToClipboard('+91 94081 71261', this)" title="Click to copy Phone"><i class="fas fa-phone"></i></div>
                         <div>
                             <h4>Phone</h4>
-                            <span>+91 94081 71261</span>
+                            <span ondblclick="copyToClipboard('+91 94081 71261', this)" title="Double click to copy" style="cursor: pointer;">+91 94081 71261</span>
                         </div>
                     </div>
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="openAhmedabadMap()" title="Open Map"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h4>Location</h4>
-                            <span>Ahmedabad, Gujarat, India</span>
+                            <span style="cursor: pointer;" onclick="openAhmedabadMap()" title="Open Map">Ahmedabad, Gujarat, India</span>
                         </div>
                     </div>
                 </div>
