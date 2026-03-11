@@ -55,6 +55,11 @@ if (cursorGlow) {
         }
         el.style.transition = 'transform 0.1s ease-out, box-shadow 0.2s ease-out';
         el.style.zIndex = '100';
+        
+        // Make the cursor transparent when it blends into solid primary buttons
+        if (el.classList.contains('btn-primary') || el.classList.contains('social-icon')) {
+            cursorGlow.style.background = 'transparent';
+        }
     };
 
     const resetMagnetic = (el) => {
@@ -65,6 +70,7 @@ if (cursorGlow) {
         cursorGlow.style.width = '';
         cursorGlow.style.height = '';
         cursorGlow.style.borderRadius = '';
+        cursorGlow.style.background = '';
         
         el.style.transform = '';
         el.style.boxShadow = '';
@@ -608,7 +614,7 @@ projectCards.forEach(card => {
 
 // ==== Global Contact Interaction Utilities ====
 function copyToClipboard(text, element) {
-    navigator.clipboard.writeText(text).then(() => {
+    const showTooltip = () => {
         // Create tooltip
         const tooltip = document.createElement('div');
         tooltip.textContent = 'Copied!';
@@ -643,9 +649,34 @@ function copyToClipboard(text, element) {
             tooltip.style.transform = `translateX(-50%) translateY(-10px)`;
             setTimeout(() => tooltip.remove(), 200);
         }, 2000);
-    }).catch(err => {
-        console.error('Failed to copy contact info: ', err);
-    });
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showTooltip).catch(err => {
+            console.error('Failed to copy contact info: ', err);
+            fallbackCopyTextToClipboard(text, showTooltip);
+        });
+    } else {
+        fallbackCopyTextToClipboard(text, showTooltip);
+    }
+}
+
+function fallbackCopyTextToClipboard(text, successCallback) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        var successful = document.execCommand('copy');
+        if (successful) successCallback();
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
 }
 
 function openAhmedabadMap() {
