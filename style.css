@@ -975,6 +975,7 @@ ul.duties strong {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 28px;
+        align-items: stretch; /* equal-height cards in each row */
     }
 }
 
@@ -989,25 +990,39 @@ ul.duties strong {
 }
 
 .project-img-container {
-    height: 200px;
+    /* Reserve space before image loads = prevents CLS */
+    aspect-ratio: 3 / 2;
     width: 100%;
     overflow: hidden;
     position: relative;
+    background: var(--card-bg); /* placeholder bg color */
 }
 
 .project-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block; /* remove bottom gap */
 }
 
 .project-card:hover .project-img {
-    transform: scale(1.05);
+    transform: scale(1.07);
+}
+
+/* Hover lift effect for better UX */
+.project-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.18);
 }
 
 .project-content-padded {
-    padding: 30px;
+    padding: clamp(16px, 3vw, 30px);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
