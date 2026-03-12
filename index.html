@@ -12,8 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Hooks -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Custom CSS with cache-busting -->
+    <link rel="stylesheet" href="style.css?v=3">
+    <meta name="theme-color" content="#07090c" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
 </head>
 <body>
     <div class="cursor-glow"></div>
@@ -29,16 +31,23 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li>
                     <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
                         <i class="fas fa-moon"></i>
                     </button>
                 </li>
+                <!-- Mobile-only close button inside the menu -->
+                <li class="mobile-nav-close">
+                    <button class="mobile-menu-close-btn" aria-label="Close navigation menu">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </li>
             </ul>
-            <div class="mobile-menu-btn">
+            <button class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -107,6 +116,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         referrerpolicy="strict-origin-when-cross-origin" 
                         allowfullscreen
+                        loading="lazy"
                         style="display: block;">
                     </iframe>
                 </div>
@@ -376,20 +386,24 @@
             <div class="edu-grid">
                 <div class="edu-card glass-card">
                     <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Bachelor of Engineering - Civil Engineering</h3>
-                    <p class="inst">Sal Institute of Technology and Engineering Research</p>
-                    <div class="edu-meta">
-                        <span><i class="far fa-calendar-alt"></i> Graduated 2019</span>
-                        <span><i class="fas fa-star"></i> GPA: 6.64</span>
+                    <div class="edu-card-body">
+                        <h3>Bachelor of Engineering - Civil Engineering</h3>
+                        <p class="inst">Sal Institute of Technology and Engineering Research</p>
+                        <div class="edu-meta">
+                            <span><i class="far fa-calendar-alt"></i> Graduated 2019</span>
+                            <span><i class="fas fa-star"></i> GPA: 6.64</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="edu-card glass-card">
                     <div class="edu-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Google Data Analytics Professional Certificate</h3>
-                    <p class="inst">Coursera</p>
-                    <div class="edu-meta">
-                        <span><i class="far fa-calendar-alt"></i> 2023</span>
+                    <div class="edu-card-body">
+                        <h3>Google Data Analytics Professional Certificate</h3>
+                        <p class="inst">Coursera</p>
+                        <div class="edu-meta">
+                            <span><i class="far fa-calendar-alt"></i> 2023</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -461,7 +475,7 @@
     <!-- Section Full-Page Modal Wrapper -->
     <div id="section-modal" class="modal">
         <div class="modal-overlay" title="Click outside to close"></div>
-        <div class="modal-content section-modal-content" style="max-width: 1400px; width: 95%; max-height: 95vh; height: 95vh; overflow-y: auto; display: flex; flex-direction: column;">
+        <div class="modal-content section-modal-content">
             <div style="position: relative; z-index: 10; background: transparent; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); margin-bottom: 20px;">
                 <div id="section-modal-title" style="font-family: var(--font-heading); font-size: 2rem; color: var(--text-main); margin: 0;"></div>
                 <button class="modal-close" aria-label="Close Modal" title="Close this full-page view" id="section-modal-close" style="background: transparent; border: 1px solid var(--card-border); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); transition: var(--transition);">
@@ -474,6 +488,12 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
+
+    <!-- Sticky Mobile CTA bar (visible on mobile only) -->
+    <div class="mobile-cta-bar" role="complementary" aria-label="Quick actions">
+        <a href="#contact" class="mobile-cta-btn"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="Kashyap_Patel_CV.pdf" download class="mobile-cta-btn mobile-cta-primary"><i class="fas fa-download"></i> Download CV</a>
+    </div>
 </body>
 </html>

@@ -171,21 +171,38 @@ if (cursorGlow) {
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
+function openMobileMenu() {
+    navLinks.classList.add('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenuBtn.querySelector('i').classList.replace('fa-bars', 'fa-times');
+}
+
+function closeMobileMenu() {
+    navLinks.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+}
+
 mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = mobileMenuBtn.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-        icon.classList.replace('fa-bars', 'fa-times');
-    } else {
-        icon.classList.replace('fa-times', 'fa-bars');
-    }
+    navLinks.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
 });
 
+// Close button inside the nav menu (✕ Close)
+const mobileMenuCloseBtn = document.querySelector('.mobile-menu-close-btn');
+if (mobileMenuCloseBtn) {
+    mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+}
+
+// Close menu when a nav link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-    });
+    link.addEventListener('click', closeMobileMenu);
+});
+
+// Close menu when pressing Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        closeMobileMenu();
+    }
 });
 
 
