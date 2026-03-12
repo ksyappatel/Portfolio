@@ -51,11 +51,12 @@
                 <h2 class="title" style="font-size: clamp(20px, 3.5vw, 45px);">Digital Transformation Engineer (AI & Automation)</h2>
                 <p class="hero-bio">I specialize in identifying operational bottlenecks, conducting deep research into emerging AI tools, and continuously learning to orchestrate elegant, automated solutions.</p>
                 <div class="contact-info">
-                    <span style="cursor:pointer;" title="Click icon to open Map"><i class="fas fa-map-marker-alt" onclick="openAhmedabadMap()"></i> <span onclick="openAhmedabadMap()">Ahmedabad, Gujarat, India</span></span>
-                    <span ondblclick="copyToClipboard('+91 94081 71261', this)" title="Double click to copy phone" style="cursor:pointer;"><i class="fas fa-phone" onclick="copyToClipboard('+91 94081 71261', this.parentElement)" title="Click icon to copy"></i> +91 94081 71261</span>
+                    <span class="contact-item-hover" title="Click to open Map"><i class="fas fa-map-marker-alt" onclick="openAhmedabadMap()"></i> <span onclick="openAhmedabadMap()">Ahmedabad, Gujarat, India</span></span>
+                    <span class="contact-item-hover" title="Click to copy phone"><i class="fas fa-phone" onclick="copyToClipboard('+91 94081 71261', this.parentElement)"></i> <span onclick="copyToClipboard('+91 94081 71261', this)">+91 94081 71261</span></span>
+                    <span class="contact-item-hover" title="Click to copy email"><i class="fas fa-envelope" onclick="copyToClipboard('ksyappatel@gmail.com', this.parentElement)"></i> <span onclick="copyToClipboard('ksyappatel@gmail.com', this)">ksyappatel@gmail.com</span></span>
                 </div>
                 <div class="social-links">
-                    <a href="mailto:ksyappatel@gmail.com" target="_blank" aria-label="Email" class="btn btn-primary" title="Send an email to Kashyap">
+                    <a href="mailto:ksyappatel@gmail.com" aria-label="Email" class="btn btn-primary" title="Send an email to Kashyap">
                         <i class="fas fa-envelope"></i> Email Me
                     </a>
                     <a href="https://linkedin.com/in/kashyap-patel-7602381a0" target="_blank" aria-label="LinkedIn" class="social-icon">
@@ -75,7 +76,7 @@
                 <h2 class="section-title">Professional Identity</h2>
                 <div class="title-line"></div>
             </div>
-            <div class="about-content glass-card" style="display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start;">
+            <div class="about-content glass-card">
                 <div class="about-text">
                     <p>AI Automation Engineer with 2+ years of experience at S&P Global, focused on building enterprise AI solutions that transform manual workflows into intelligent, automated systems. Skilled in Microsoft Copilot Studio, Power Platform, and Generative AI to design copilots, orchestrate automation workflows, and integrate enterprise applications.</p>
                     <br>
@@ -96,7 +97,7 @@
                     </div>
                 </div>
                 
-                <div class="about-video" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); width: 280px; flex-shrink: 0;">
+                <div class="about-video">
                     <iframe 
                         width="100%" 
                         height="498" 
@@ -192,7 +193,7 @@
 
         <!-- Experience Section -->
         <section id="experience" class="experience section reveal">
-            <div class="section-header clickable-header" onclick="openSectionModal('experience', 'Professional Experience')" title="Click to view the complete Experience Timeline" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: var(--transition);">
+            <div class="section-header clickable-header" onclick="openSectionModal('experience', 'Professional Experience')" title="Click to view the complete Experience Timeline" style="display: flex; align-items: center; justify-content: space-between; transition: var(--transition);">
                 <div style="display: flex; align-items: center; flex-grow: 1;">
                     <h2 class="section-title" style="display: flex; align-items: center; transition: var(--transition); margin-bottom: 0;">Experience <i class="fas fa-expand-arrows-alt" style="font-size: 0.45em; opacity: 0.4; margin-left: 15px;"></i></h2>
                     <div class="title-line"></div>
@@ -266,7 +267,7 @@
 
         <!-- Projects Section -->
         <section id="projects" class="projects section reveal">
-            <div class="section-header clickable-header" onclick="openSectionModal('projects', 'Automation Solutions & Projects Delivered')" title="Click to view all full project deep-dives" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: var(--transition);">
+            <div class="section-header clickable-header" onclick="openSectionModal('projects', 'Automation Solutions & Projects Delivered')" title="Click to view all full project deep-dives" style="display: flex; align-items: center; justify-content: space-between; transition: var(--transition);">
                 <div style="display: flex; align-items: center; flex-grow: 1;">
                     <h2 class="section-title" style="display: flex; align-items: center; transition: var(--transition); margin-bottom: 0;">Automation Solutions & Projects Delivered <i class="fas fa-expand-arrows-alt" style="font-size: 0.45em; opacity: 0.4; margin-left: 15px;"></i></h2>
                     <div class="title-line"></div>
@@ -405,29 +406,32 @@
                 
                 <div class="contact-details mt-5" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="copyToClipboard('ksyappatel@gmail.com', this)" title="Click to copy Email"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-icon contact-item-hover" style="margin-bottom: 10px;" onclick="copyToClipboard('ksyappatel@gmail.com', this)" title="Click to copy Email"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
-                            <span class="copyable-text" ondblclick="copyToClipboard('ksyappatel@gmail.com', this)" title="Double click to copy" style="color: var(--text-main); cursor: pointer; text-decoration: underline;">ksyappatel@gmail.com</span>
+                            <span class="copyable-text contact-item-hover" onclick="copyToClipboard('ksyappatel@gmail.com', this)" title="Click to copy" style="color: var(--text-main); text-decoration: underline;">ksyappatel@gmail.com</span>
                         </div>
                     </div>
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="copyToClipboard('+91 94081 71261', this)" title="Click to copy Phone"><i class="fas fa-phone"></i></div>
+                        <div class="contact-icon contact-item-hover" style="margin-bottom: 10px;" onclick="copyToClipboard('+91 94081 71261', this)" title="Click to copy Phone"><i class="fas fa-phone"></i></div>
                         <div>
                             <h4>Phone</h4>
-                            <span ondblclick="copyToClipboard('+91 94081 71261', this)" title="Double click to copy" style="cursor: pointer;">+91 94081 71261</span>
+                            <span class="contact-item-hover" onclick="copyToClipboard('+91 94081 71261', this)" title="Click to copy">+91 94081 71261</span>
                         </div>
                     </div>
                     <div class="contact-item" style="flex-direction: column; align-items: center; text-align: center;">
-                        <div class="contact-icon" style="margin-bottom: 10px; cursor: pointer;" onclick="openAhmedabadMap()" title="Open Map"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-icon contact-item-hover" style="margin-bottom: 10px;" onclick="openAhmedabadMap()" title="Open Map"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h4>Location</h4>
-                            <span style="cursor: pointer;" onclick="openAhmedabadMap()" title="Open Map">Ahmedabad, Gujarat, India</span>
+                            <span class="contact-item-hover" onclick="openAhmedabadMap()" title="Open Map">Ahmedabad, Gujarat, India</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="social-links mt-5" style="justify-content: center;">
+                <div class="social-links mt-5" style="justify-content: center; gap: 20px;">
+                    <a href="Kashyap_Patel_CV.pdf" download="Kashyap_Patel_CV.pdf" class="btn btn-primary" style="padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-file-download"></i> Download Resume
+                    </a>
                     <a href="https://linkedin.com/in/kashyap-patel-7602381a0" target="_blank" aria-label="LinkedIn" class="social-icon">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
@@ -449,11 +453,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Floating Download Resume Button -->
-    <a href="#" class="floating-btn btn-primary" aria-label="Download Resume" title="Download Resume">
-        <i class="fas fa-file-download"></i>
-    </a>
 
     <footer>
         <p>&copy; 2026 Kashyap Patel. Designed & Built showcasing Modern Aesthetic methodologies.</p>

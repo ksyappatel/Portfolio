@@ -52,6 +52,62 @@ To provide a focused, distraction-free reading experience, we will add full-scre
 2. **Launch Buttons**: Add a sleek `[ ⛶ Focused View ]` or `[ View All Pop-up ]` button directly next to the section headers for **Experience** and **Automation Solutions & Projects Delivered**.
 3. **Dynamic Content Cloning**: In [script.js](file:///d:/Development/Portfolio/script.js), when these buttons are clicked, the javascript will instantly clone the entire HTML structure of that section (the full timelines or the full project grid) and inject it into the modal wrapper, allowing the user to view all the content in one isolated, immersive view.
 
+### Phase 17: Interactive Contact Details & Cursor Refinement
+To maximize utility and interactive polish:
+1. **Interactive Contact Grid**:
+    - **Single-click** on Email/Phone icons to copy info to clipboard.
+    - **Double-click** on Email/Phone text to copy info to clipboard.
+    - **Single-click** on Location icon/text to open Google Maps query for Ahmedabad.
+    - **Universal Fallback**: Use `document.execCommand('copy')` if `navigator.clipboard` is restricted (often an issue on local files).
+2. **Unified Cursor "Merge"**:
+    - Ensure EVERY contact icon and text block has the magnetic "snapping" behavior.
+    - Remove specialized transparency overrides; allow the cursor to use a consistent translucent glass highlight `rgba(255, 255, 255, 0.2)` that "merges" into the container regardless of background color.
+3. **Double-Click Experience**: Convert `mailto:` links to `<span>` elements to prevent the default email client from snapping open during a double-click attempt.
+
+### Phase 18: Hero Interaction & CV Integration
+To align with the user's latest preference for rapid interaction:
+1. **Simplified Hero Copy**: 
+    - Change Hero section email/phone text from `ondblclick` to `onclick` for instant single-click copying.
+    - Maintain single-click icon copy behavior for consistency.
+2. **Actionable Primary CTA**: 
+    - Revert the "Email Me" button logic to use a functional `mailto:` link so it correctly opens the user's default email client as requested.
+3. **Resume Download**: 
+    - Link the floating download button and any resume links to the local file `Kashyap_Patel_CV.pdf`.
+    - Ensure the `download` attribute is set to trigger a direct browser download rather than just opening the file.
+
+### Phase 19: UI Streamlining & Scroll Polish
+To simplify the navigation and finalize the professional aesthetic:
+1. **Interaction Cleanup**: 
+    - **Remove** the floating download resume button (bottom-right).
+    - **Remove** the redundant e-mail icon from the social links bar in the footer.
+2. **Streamlined Copying**: 
+    - Convert footer contact grid items (email/phone) from `ondblclick` to `onclick` for single-click copy behavior.
+3. **Visual Alignment**: 
+    - **Scroll Alignment**: Ensure the main body scrollbar matches the modal's sleek blue aesthetic.
+    - **Offset Fix**: Add `scroll-margin-top: 100px` to all major sections to ensure section headings aren't obscured by the sticky navbar.
+
+### Phase 20: Mobile & Device Optimization
+To ensure a seamless experience across all screen sizes:
+1. **Overflow & Layout Fixes**: 
+    - Replace any remaining fixed-pixel widths (e.g., `800px`, `1200px`) with `max-width: 100%` or percentage-based containers.
+    - Ensure `box-sizing: border-box` is respected across all complex components to prevent padding-induced width expansion.
+2. **Responsive Component Refinement**: 
+    - **Hero Section**: Stack the video and summary vertically on mobile while maintaining readable typography.
+    - **Achievements & Stats**: Ensure the 2x2 or 1x1 stacking logic is robust and that cards don't bleed off the screen.
+    - **Modals**: Update `.modal-content` and `.section-modal-content` to use responsive widths (e.g., `92vw`) and adaptive padding for mobile/tablet.
+3. **Navigation & Interactivity**: 
+    - Fix the mobile menu accessibility by ensuring it remains within the visual viewport regardless of page overflow.
+    - Audit all clickable areas to ensure "Fat Finger" compliance (minimum 44px tap targets).
+
+### Phase 21: Universal Spacing & Border Optimization
+To achieve a more sophisticated, "universal" fit across all devices:
+1. **Fluid Global Spacing**: 
+    - Introduce CSS variables for `card-padding` and `border-radius` using `clamp()` (e.g., `padding: clamp(15px, 4vw, 30px)`).
+2. **Harmonized Borders**: 
+    - Synchronize the `border-radius` of all `glass-card`, `project-card`, and `modal-content` elements.
+3. **Section Header Fluidity**: 
+    - Optimize the gap in `.section-header` to prevent horizontal crowding.
+
 ## Verification Plan
 
 ### Automated Tests

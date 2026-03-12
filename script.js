@@ -55,11 +55,6 @@ if (cursorGlow) {
         }
         el.style.transition = 'transform 0.1s ease-out, box-shadow 0.2s ease-out';
         el.style.zIndex = '100';
-        
-        // Make the cursor transparent when it blends into solid primary buttons
-        if (el.classList.contains('btn-primary') || el.classList.contains('social-icon')) {
-            cursorGlow.style.background = 'transparent';
-        }
     };
 
     const resetMagnetic = (el) => {
@@ -130,7 +125,7 @@ if (cursorGlow) {
         const target = e.target;
         
         // Track Magnetic Elements Dynamically
-        const magSelector = '.btn, button, .social-icon, .icon-btn, .nav-links a, .modal-close, .logo, .project-card, .btn-primary';
+        const magSelector = '.btn, button, .social-icon, .icon-btn, .nav-links a, .modal-close, .logo, .project-card, .btn-primary, .contact-item-hover, .clickable-header';
         const magEl = (target && target.closest) ? target.closest(magSelector) : null;
         
         if (magEl) {
