@@ -1,4 +1,4 @@
-// ==== Theme Toggle (3-way: dark → light → Sunshine) ====
+// ==== Theme Toggle (4-way: dark → light → Sunshine → Cosmic) ====
 const themeToggleBtn = document.getElementById('theme-toggle');
 // ⚠️ Use document.documentElement (<html>) NOT body — webkit scrollbars belong to html
 const themeRoot = document.documentElement;
@@ -8,12 +8,24 @@ const themeIcon = themeToggleBtn.querySelector('i');
 // Theme definitions
 // 'label' = tooltip shown while ON this theme (tells user what next click will do)
 const themes = [
-    { value: null,     icon: 'fa-moon',  label: 'Switch to Light mode'    },  // on dark     → go light
-    { value: 'light',  icon: 'fa-sun',   label: 'Switch to Sunshine mode' },  // on light    → go sunshine
-    { value: 'orange', icon: 'fa-fire',  label: 'Switch to Dark mode'     },  // on sunshine → go dark
+    { value: null,     icon: 'fa-moon',          label: 'Switch to Light mode'    },  // on dark     → go light
+    { value: 'light',  icon: 'fa-sun',           label: 'Switch to Sunshine mode' },  // on light    → go sunshine
+    { value: 'orange', icon: 'fa-fire',          label: 'Switch to Cosmic mode'   },  // on sunshine → go cosmic
+    { value: 'purple', icon: 'fa-shuttle-space', label: 'Switch to Dark mode'     },  // on cosmic   → go dark
 ];
 
-function applyTheme(themeValue) {
+function triggerHaptic(type) {
+    if (!navigator.vibrate) return;
+    if (type === 'theme-purple') {
+        navigator.vibrate([100, 50, 100, 50, 150]); // Cosmic pulse
+    } else if (type === 'theme-switch') {
+        navigator.vibrate(50); // General feedback
+    } else if (type === 'click') {
+        navigator.vibrate(30); // Subtle click
+    }
+}
+
+function applyTheme(themeValue, isInitial = false) {
     // Set on <html> so [data-theme="orange"]::-webkit-scrollbar-thumb works
     if (themeValue) {
         themeRoot.setAttribute('data-theme', themeValue);
@@ -25,13 +37,20 @@ function applyTheme(themeValue) {
     themeToggleBtn.setAttribute('aria-label', current.label);
     themeToggleBtn.setAttribute('title', current.label);
     localStorage.setItem('portfolio-theme', themeValue || 'dark');
+
+    // Haptics (don't trigger on initial load)
+    if (!isInitial) {
+        if (themeValue === 'purple') triggerHaptic('theme-purple');
+        else triggerHaptic('theme-switch');
+    }
 }
 
 // Restore saved theme on load
 const savedTheme = localStorage.getItem('portfolio-theme');
-if (savedTheme === 'light')       applyTheme('light');
-else if (savedTheme === 'orange') applyTheme('orange');
-else                              applyTheme(null);
+if (savedTheme === 'light')       applyTheme('light', true);
+else if (savedTheme === 'orange') applyTheme('orange', true);
+else if (savedTheme === 'purple') applyTheme('purple', true);
+else                              applyTheme(null, true);
 
 themeToggleBtn.addEventListener('click', () => {
     const current = themeRoot.getAttribute('data-theme') || null;
@@ -711,3 +730,13 @@ function fallbackCopyTextToClipboard(text, successCallback) {
 function openAhmedabadMap() {
     window.open('https://www.google.com/maps/place/Ahmedabad,+Gujarat,+India', '_blank');
 }
+
+// Haptics for all primary interactions in Cosmic Purple Mode
+document.addEventListener('click', (e) => {
+    if (document.documentElement.getAttribute('data-theme') !== 'purple') return;
+    
+    // Trigger on buttons, links, or specific interactive cards
+    if (e.target.closest('a, button, .project-card, .edu-card, .hero-stat-box')) {
+        triggerHaptic('click');
+    }
+});
