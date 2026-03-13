@@ -31,7 +31,62 @@
     --text-muted: #4b5563;
     --accent: #2563eb;
     --accent-glow: rgba(37, 99, 235, 0.2);
+    --accent-secondary: #6366f1;
 }
+
+/* ==== Orange Tech Theme ==== */
+[data-theme="orange"] {
+    --bg-color: #0d0a07;
+    --card-bg: rgba(249, 115, 22, 0.04);
+    --card-border: rgba(249, 115, 22, 0.15);
+    --text-main: #fef3e2;
+    --text-muted: #d6b89a;
+    --accent: #f97316;
+    --accent-glow: rgba(249, 115, 22, 0.35);
+    --accent-secondary: #fb923c;
+}
+
+[data-theme="orange"] .navbar {
+    background: rgba(13, 10, 7, 0.85);
+    border-bottom-color: rgba(249, 115, 22, 0.2);
+}
+
+[data-theme="orange"] .blob-1 {
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.25) 0%, transparent 70%);
+}
+
+[data-theme="orange"] .blob-2 {
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.15) 0%, transparent 70%);
+}
+
+[data-theme="orange"] .hero-stat-box {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(251, 146, 60, 0.06) 100%);
+    border-color: rgba(249, 115, 22, 0.3);
+}
+
+[data-theme="orange"] .hero-stat-number,
+[data-theme="orange"] .hero-stat-suffix {
+    background: linear-gradient(90deg, #f97316, #fb923c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="orange"] .btn-primary {
+    background-color: #f97316;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+}
+
+[data-theme="orange"] .btn-primary:hover {
+    background-color: #ea6512;
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6);
+}
+
+[data-theme="orange"] .project-card:hover {
+    box-shadow: 0 20px 60px rgba(249, 115, 22, 0.2);
+}
+
+
 
 /* ==== Base Styles ==== */
 * {
@@ -100,7 +155,7 @@ ul {
     right: -10%;
     width: 50vw;
     height: 50vw;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     animation-delay: -10s;
 }
 
@@ -1576,28 +1631,64 @@ footer {
     }
 }
 
-/* Global Scrollbar Styling */
+/* ==== Global Scrollbar — Themed & Minimal ==== */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
 }
 
-[data-theme="dark"] ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.01);
+/* Dark theme track */
+:root::-webkit-scrollbar-track,
+[data-theme="dark"]::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Light theme track */
+[data-theme="light"]::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* Orange theme track */
+[data-theme="orange"]::-webkit-scrollbar-track {
+    background: rgba(249, 115, 22, 0.08);
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--accent);
-    border-radius: 10px;
-    border: 3px solid var(--bg-color);
+    border-radius: 99px;
+    border: 2px solid var(--bg-color);
+    transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-secondary);
 }
+
+/* Explicit Sunshine (orange) theme scrollbar — CSS vars don't always resolve in webkit pseudo-elements */
+[data-theme="orange"]::-webkit-scrollbar-thumb {
+    background: #f97316;
+    border-color: #0d0a07;
+}
+
+[data-theme="orange"]::-webkit-scrollbar-thumb:hover {
+    background: #fb923c;
+}
+
+/* Firefox per-theme */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+html[data-theme="orange"] body,
+html body[data-theme="orange"] {
+    scrollbar-color: #f97316 rgba(249, 115, 22, 0.08);
+}
+
 
 
 /* ==== Section Modal (migrated from inline styles) ==== */

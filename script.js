@@ -1,29 +1,46 @@
-// ==== Theme Toggle ====
+// ==== Theme Toggle (3-way: dark → light → Sunshine) ====
 const themeToggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
+// ⚠️ Use document.documentElement (<html>) NOT body — webkit scrollbars belong to html
+const themeRoot = document.documentElement;
+const body      = document.body; // still needed for other references
 const themeIcon = themeToggleBtn.querySelector('i');
 
-// Check for saved theme
-const savedTheme = localStorage.getItem('portfolio-theme');
-if (savedTheme === 'light') {
-    body.setAttribute('data-theme', 'light');
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
+// Theme definitions
+// 'label' = tooltip shown while ON this theme (tells user what next click will do)
+const themes = [
+    { value: null,     icon: 'fa-moon',  label: 'Switch to Light mode'    },  // on dark     → go light
+    { value: 'light',  icon: 'fa-sun',   label: 'Switch to Sunshine mode' },  // on light    → go sunshine
+    { value: 'orange', icon: 'fa-fire',  label: 'Switch to Dark mode'     },  // on sunshine → go dark
+];
+
+function applyTheme(themeValue) {
+    // Set on <html> so [data-theme="orange"]::-webkit-scrollbar-thumb works
+    if (themeValue) {
+        themeRoot.setAttribute('data-theme', themeValue);
+    } else {
+        themeRoot.removeAttribute('data-theme');
+    }
+    const current = themes.find(t => t.value === themeValue);
+    themeIcon.className = 'fas ' + current.icon;
+    themeToggleBtn.setAttribute('aria-label', current.label);
+    themeToggleBtn.setAttribute('title', current.label);
+    localStorage.setItem('portfolio-theme', themeValue || 'dark');
 }
 
+// Restore saved theme on load
+const savedTheme = localStorage.getItem('portfolio-theme');
+if (savedTheme === 'light')       applyTheme('light');
+else if (savedTheme === 'orange') applyTheme('orange');
+else                              applyTheme(null);
+
 themeToggleBtn.addEventListener('click', () => {
-    if (body.getAttribute('data-theme') === 'light') {
-        body.removeAttribute('data-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('portfolio-theme', 'dark');
-    } else {
-        body.setAttribute('data-theme', 'light');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('portfolio-theme', 'light');
-    }
+    const current = themeRoot.getAttribute('data-theme') || null;
+    const idx     = themes.findIndex(t => t.value === current);
+    const next    = themes[(idx + 1) % themes.length];
+    applyTheme(next.value);
 });
+
+
 
 
 // ==== Custom Cursor Glow (iPad Style) ====
