@@ -11,7 +11,7 @@ const themes = [
     { value: null,     icon: 'fa-moon',          label: 'Switch to Light mode'    },  // on dark     → go light
     { value: 'light',  icon: 'fa-sun',           label: 'Switch to Sunshine mode' },  // on light    → go sunshine
     { value: 'orange', icon: 'fa-fire',          label: 'Switch to Cosmic mode'   },  // on sunshine → go cosmic
-    { value: 'purple', icon: 'fa-shuttle-space', label: 'Switch to Dark mode'     },  // on cosmic   → go dark
+    { value: 'purple', icon: 'fa-microchip',     label: 'Switch to Dark mode'     },  // on cosmic   → go dark (AI Chip Icon)
 ];
 
 function triggerHaptic(type) {
@@ -198,7 +198,11 @@ if (cursorGlow) {
     
     document.addEventListener('mouseup', () => {
         cursorGlow.classList.remove('clicking');
-        if (currentMagneticEl) currentMagneticEl.classList.remove('clicking');
+        if (currentMagneticEl) {
+            currentMagneticEl.classList.remove('clicking');
+            // Force reset on mouseup to prevent "sticking" after clicking section headers or buttons
+            resetMagnetic(currentMagneticEl);
+        }
     });
 }
 

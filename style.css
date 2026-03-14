@@ -99,6 +99,18 @@
     --accent-secondary: #ec4899;
 }
 
+/* AI Pulse Animation for Cosmic Icon */
+[data-theme="purple"] #theme-toggle i {
+    animation: aiPulse 2s infinite ease-in-out;
+    color: #60a5fa; /* Electric Blue chip color */
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+}
+
+@keyframes aiPulse {
+    0%, 100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.8)); }
+    50% { transform: scale(0.9); opacity: 0.8; filter: drop-shadow(0 0 2px rgba(96, 165, 250, 0.4)); }
+}
+
 [data-theme="purple"] .navbar {
     background: rgba(10, 6, 18, 0.85);
     border-bottom-color: rgba(168, 85, 247, 0.2);
@@ -299,9 +311,11 @@ ul {
     backdrop-filter: none;
 }
 
-/* Enforce custom cursor only */
-* {
-    cursor: none !important;
+/* Enforce custom cursor only on desktop/pointing devices */
+@media (hover: hover) and (pointer: fine) {
+    * {
+        cursor: none !important;
+    }
 }
 
 
@@ -1493,35 +1507,38 @@ ul.duties strong {
 }
 
 .modal-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: none;
+    position: sticky;
+    top: 0;
+    margin-left: auto;
+    margin-bottom: -40px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     color: var(--text-main);
     font-size: 1.5rem;
     cursor: pointer;
     transition: var(--transition);
-    z-index: 2002;
-    width: 40px;
-    height: 40px;
+    z-index: 2005;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .modal-close:hover {
     color: var(--accent);
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1);
+    border-color: var(--accent);
 }
 
-.modal-body h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    padding-right: 40px;
-    /* space for close button */
+/* Prevent title overlap with sticky close button */
+.modal-body h2, 
+#section-modal-title {
+    padding-right: 60px;
+    margin-top: 10px;
 }
 
 .modal-meta {
